@@ -28,17 +28,17 @@ echo "<!DOCTYPE html>
 					</li>
 					<li>
 						<a href=\"rules.php\">Rules</a>
-						
+
 					</li>
 					<li>
-						<a href=\"https://www.facebook.com/decipher.ritu\" target=\"_blank\">WATSON</a>				
+						<a href=\"https://www.facebook.com/decipher.ritu\" target=\"_blank\">WATSON</a>
 					</li>";
 					if (isset($_SESSION["fbuid"]))
 					echo "<li>
-						<a href=\"logout.php\">logout</a>					
+						<a href=\"logout.php\">logout</a>
 					</li>";
-					
-					
+
+
 				echo "</ul>
 			</div>
 		</div>
@@ -48,9 +48,9 @@ echo "<!DOCTYPE html>
 require_once __DIR__ . '/src/Facebook/autoload.php';
 
 $fb = new Facebook\Facebook([
-  'app_id' => 'yourappid',
-  'app_secret' => 'appsecret',
-  'default_graph_version' => 'v2.5',
+  'app_id' => '527667570960032',
+  'app_secret' => '802bab5fecb18e9e789756e9b9e1d409',
+  'default_graph_version' => 'v2.12',
   ]);
 
 $helper = $fb->getRedirectLoginHelper();
@@ -92,7 +92,7 @@ if (isset($accessToken)) {
 
 	// redirect the user back to the same page if it has "code" GET variable
 	if (isset($_GET['code'])) {
-		header('Location: ./decipher/index.php'); 
+		header('Location: ./decipher/index.php');
 	}
 
 	// getting basic info about user
@@ -111,7 +111,7 @@ if (isset($accessToken)) {
 		echo 'Facebook SDK returned an error: ' . $e->getMessage();
 		exit;
 	}
-	
+
 	// printing $profile array on the screen which holds the basic info about user
 	//print_r($profile);
 	$id=$profile['id'];
@@ -121,19 +121,19 @@ if (isset($accessToken)) {
 	$ref = $result->query($sql);
 	$count=mysqli_num_rows($ref);
 	if ($count==0)
-	{	
+	{
 		$sql= "INSERT INTO `users` (`fbuid`, `name`, `level`,`role`) VALUES ('".$id."', '".$name."', '0', '1')";
 		$ref = $result->query($sql);
 		$_SESSION["role"]=1;
 		$_SESSION["level"]=0;
-	
+
         $output = "<script>
         window.location='register.php';
         </script>";
 	  echo $output;
-		
+
 	}
-	
+
 	$sql = "SELECT * FROM users WHERE fbuid=".$id;
 	$ref = $result->query($sql);
 	$row = mysqli_fetch_assoc($ref);
@@ -143,7 +143,7 @@ if (isset($accessToken)) {
 
 	if($_SESSION["role"] ==10 )
 	{
-		
+
         $output = "<script>
         window.location='shakthiman.php';
         </script>";
@@ -165,16 +165,16 @@ if (isset($accessToken)) {
 		 $rowcount=mysqli_num_rows($ref);
 		$row = mysqli_fetch_assoc($ref);
 		$content = "<div id=\"ques\">
-			<h2 id=\"head\">".$row["title"]."</h2> 
+			<h2 id=\"head\">".$row["title"]."</h2>
 			<br>".$row['contents']. "</div>";
-		
-		
-		if(!($rowcount))	
+
+
+		if(!($rowcount))
 		{$content = "<p class=\"ack\">SO YOU REACHED ME SHERLOCK...<br>THATS UNBELIEVABLE...<br>JUST WAIT HERE TILL I SET NEW SCENES FOR YOU</p>";
 		}
 		else
 			$content =$content."<br><div id = \"answerbox\"><form action = \"answer.php\" name = \"answer\"><input id=\"ans\" type = \"text\" name = \"answer\"  autofocus autocomplete=\"off\"><br><input id=\"sub\" type = \"submit\" value = \"Check\"></form>";
-print $content;	
+print $content;
 $sql= "SELECT count( * ) as rank
 FROM `users`
 WHERE level > (
@@ -198,13 +198,13 @@ WHERE fbuid =".$_SESSION["fbuid"]." )
 echo "<h2>Your rank  ".$rank."</h2>";
 echo '<a href="https://goo.gl/IEqrNw" target="_blank"><img src="imgs/decipher-banner.jpg"></a>';
 
-	}	
+	}
 	else if ($_SESSION["role"]<0)
 	{
 		$content = "<p class=\"ack\">You have been banned from playing.<br> Contact the FB page</p>";
-		print $content;	
+		print $content;
 	}
-	
+
 
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
@@ -212,16 +212,16 @@ echo '<a href="https://goo.gl/IEqrNw" target="_blank"><img src="imgs/decipher-ba
 	$loginUrl = $helper->getLoginUrl('http://decipher.ritu16.com/');
 	echo "<div style=\"padding-top:5%;\"><h1> MISS ME?</h1>
 					<span><a href=\"".$loginUrl ."\" class=\"email\">LOGIN WITH FACEBOOK</a></span></div>
-				
+
 					";
 					/*echo '<a href="https://goo.gl/IEqrNw" target="_blank"><img id="adv" style="position:fixed;bottom:0px;left:0px;" src="imgs/decipher-banner.jpg"></a>';*/
 }
 echo "</div>
 			</div>
-			
+
 		</div>
-		
-			
+
+
 	</div>
 </body>
 </html>
