@@ -8,6 +8,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `wrong` (
 		   `current` int(2) NOT NULL,UNIQUE KEY `no` (`no`)
 	);";
 $ref = $result->query($sql);
+if(!$ref) echo "faild";
 $sql = "CREATE TABLE IF NOT EXISTS `correct` (
 		  `no` int(2) NOT NULL AUTO_INCREMENT,
 		  `path` varchar(100) DEFAULT NULL,
