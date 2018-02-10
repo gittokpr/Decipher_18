@@ -209,7 +209,7 @@ echo '<a href="https://goo.gl/IEqrNw" target="_blank"><img src="imgs/decipher-ba
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
 	// if not logged in display
-	$loginUrl = $helper->getLoginUrl('http://decipher.ritu16.com/');
+	$loginUrl = $helper->getLoginUrl('http://www.diwa.ml/');
 	echo "<div style=\"padding-top:5%;\"><h1> MISS ME?</h1>
 					<span><a href=\"".$loginUrl ."\" class=\"email\">LOGIN WITH FACEBOOK</a></span></div>
 
