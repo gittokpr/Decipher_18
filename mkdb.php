@@ -1,6 +1,6 @@
 <?php
 
-$result = mysqli_connect("localhost","thampichayan","123decipher123","decipher16");
+$result = mysqli_connect("localhost","angelawhite","littlepussy","decipher18");
 
 $sql = "CREATE TABLE IF NOT EXISTS `wrong` (
 		  `no` int(2) NOT NULL AUTO_INCREMENT,
