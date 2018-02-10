@@ -1,6 +1,6 @@
 <?php
 
-$result = mysqli_connect("localhost","angelawhite","littlepussy","decipher18");
+$result = mysqli_connect("localhost","angelawhite","littlepussy","decipher18") or die("error");
 
 $sql = "CREATE TABLE IF NOT EXISTS `wrong` (
 		  `no` int(2) NOT NULL AUTO_INCREMENT,
@@ -65,5 +65,5 @@ $sql = "CREATE TABLE IF NOT EXISTS `accesslogs` (
 		  UNIQUE KEY `id` (`id`)
 	);";
 $ref = $result->query($sql);
-
+echo("Success");
 ?>
